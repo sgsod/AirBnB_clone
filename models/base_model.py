@@ -7,7 +7,7 @@ from datetime import datetime
 
 class BaseModel:
     """Defines all common attributes/methods of other classes
-    
+
     Attributes:
         id: Universal Unique Identifier
         created_at: time object is created
@@ -16,16 +16,16 @@ class BaseModel:
     Method:
         __str__: prints the class name, id and __dict__
         save(self): updates updated at to current time when called
-        to_dict(self): returns a dictionary containing all 
+        to_dict(self): returns a dictionary containing all
         keys/values of __dict__ of the instance
-        
+
     """
 
-    def __init__(self):
-        """Public instance initialization"""
+    def __init__(self, *args, **kwargs):
+        """Public instance initializa, *args, **kwargs, *args, **kwargstion"""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.updated_at = self.created_at
 
     def save(self):
         """updates the updated_at attribute"""
@@ -37,7 +37,8 @@ class BaseModel:
         key "__class__" is added
         created_at and updated_at are converted with "isofformat()"
         """
-        dict_obj = self.__dict__
-        dict_obj["created_at"] = created_at.isoformat()
-        dict_obj["updated_at"] = updated_at.isoformat()
-        dict_obj["__class__"] = self.__class__.__name__
+        self.dict_obj = self.__dict__.copy()
+        self.dict_obj["created_at"] = str(self.created_at.isoformat())
+        self.dict_obj["updated_at"] = str(self.updated_at.isoformat())
+        self.dict_obj["__class__"] = self.__class__.__name__
+        return self.dict_obj
