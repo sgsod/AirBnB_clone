@@ -1,1 +1,10 @@
-# 0x00. AirBnB clone - The console
+# AirBnB clone
+A basic replica of the Airbnb web app, created for learning purposes.
+## 0x00 The Console
+This is the base of the project, the command interpreter used to 
+manage and maintain the app objects, mainly useful for;
+- Creating new objects
+- Retrieving an object from a file, a database and more...
+- Performing operations on objects (count, compute stats...)
+- Updating attributes of an object
+- Destroying an object

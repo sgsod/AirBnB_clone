@@ -22,14 +22,33 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """Public instance initializa, *args, **kwargs, *args, **kwargstion"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        """
+        Public instance initialization
+        """
+        if not kwargs:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
+
+        else:
+            for key, value in kwargs.items():
+                if key == "updated_at" or "created_at":
+                    self.__dict__[key] = datetime.fromisoformat(value)
+                elif key == "__class__":
+                    continue
+                else:
+                    self.__dict__[key] = value
 
     def save(self):
         """updates the updated_at attribute"""
         self.updated_at = datetime.now()
+
+    def __str__(self):
+        """
+        Print string representation of BaseModel
+        """
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,\
+                self.__dict__)
 
     def to_dict(self):
         """
@@ -38,7 +57,7 @@ class BaseModel:
         created_at and updated_at are converted with "isofformat()"
         """
         self.dict_obj = self.__dict__.copy()
-        self.dict_obj["created_at"] = str(self.created_at.isoformat())
-        self.dict_obj["updated_at"] = str(self.updated_at.isoformat())
+        self.dict_obj["created_at"] = self.created_at.isoformat()
+        self.dict_obj["updated_at"] = self.updated_at.isoformat()
         self.dict_obj["__class__"] = self.__class__.__name__
         return self.dict_obj
