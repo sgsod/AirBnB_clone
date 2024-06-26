@@ -31,8 +31,9 @@ class BaseModel:
             self.updated_at = self.created_at
 
         else:
+            time_keys = ('update_at', 'created_at')
             for key, value in kwargs.items():
-                if key == "updated_at" or "created_at":
+                if key in time_keys:
                     self.__dict__[key] = datetime.fromisoformat(value)
                 elif key == "__class__":
                     continue
