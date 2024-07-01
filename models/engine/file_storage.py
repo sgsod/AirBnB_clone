@@ -44,10 +44,10 @@ class FileStorage:
         Deserializes the JSON file to  __objects
         """
         try:
-        with open(self.__file_path, 'r') as load_file:
-            dict = json.loads(load.read())
-            for value in dict.values():
-                className = value["__class__"]
-                self.new(eval(className)(**value))
+            with open(self.__file_path, 'r') as load_file:
+                dict = json.loads(load.read())
+                for value in dict.values():
+                    className = value["__class__"]
+                    self.new(eval(className)(**value))
         except Exception:
             pass
