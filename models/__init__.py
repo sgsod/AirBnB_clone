@@ -1,8 +1,8 @@
-#!/usr/bin/python3
-from engine.file_storage import FileStorage
 
-__all__ = [
-        "base_model" # 'base_model.py' file
-]
+from .engine.file_storage import FileStorage
+
 storage = FileStorage()
 storage.reload()
+__all__ = [
+        "base_model",# 'base_model.py' file
+]

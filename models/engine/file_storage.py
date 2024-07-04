@@ -9,9 +9,9 @@ class FileStorage:
     Deserializing JSON file to instances
     """
 
-
-    __file_path = "file.json"
-    __objects = {}
+    def __init__(self):
+        self.__file_path = "file.json"
+        self.__objects = {}
 
     def all(self):
         """
@@ -29,25 +29,24 @@ class FileStorage:
             obj -> object to write
         """
 
-        self.__objects[obj.__class__ + '.' + obj.id] = obj
+        self.__objects[obj.id] = obj
 
     def save(self):
         """
         Serializes__objects to the JSON file
         """
-        with open(self.__file_path, 'w+') as save_file:
-            json.dump({key: value.to_dict() \
-                    for key, value in self.__objects.items()}, save_file)
+        with open(self.__file_path, "w") as save_file:
+            for key, value in self.__objects.items():
+                json.dump({key: value.to_dict()}, save_file, indent=2)
 
     def reload(self):
         """
         Deserializes the JSON file to  __objects
         """
         try:
-            with open(self.__file_path, 'r') as load_file:
-                dict = json.loads(load.read())
-                for value in dict.values():
-                    className = value["__class__"]
-                    self.new(eval(className)(**value))
+            with open(self.__file_path, "r") as load_file:
+                for line in load_file:
+                    d = json.load(line)
+                    self.new(BaseModel(d.values()))
         except Exception:
             pass

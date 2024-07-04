@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from __init__ import storage
+from . import storage
 
 """defines BaseModel - for the whole projei"""
 
