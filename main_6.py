@@ -43,9 +43,11 @@ all_reloaded = fs.all()
 
 if len(all_reloaded.keys()) != len(ids):
     print("Missing after reload")
+    print(type(all_reloaded))
+    print(len(all_reloaded.keys()))
 
 for id in ids:
-    if all_reloaded.get(id) is None  and all_reloaded.get("{}.{}".format("BaseModel", id)) is None:
+    if all_reloaded.get(id) is None and all_reloaded.get("{}.{}".format("BaseModel", id)) is None:
         print("Missing {}".format(id))
 
 try:

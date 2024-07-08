@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-import cmd
-
 """
 Console command interpreter.
 
@@ -8,6 +6,8 @@ Class:
 
     HNBHCommand
 """
+
+import cmd
 
 
 class HBNBCommand(cmd.Cmd):
@@ -22,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
         emptyline
         EOF
         exit
-"""
+    """
 
 
     def __init__(self):

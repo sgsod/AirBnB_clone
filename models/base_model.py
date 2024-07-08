@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from . import storage
+import models
 
 """defines BaseModel - for the whole projei"""
 
@@ -30,7 +30,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-            storage.new(self)
+            models.storage.new(self)
 
         else:
             time_keys = ('update_at', 'created_at')
