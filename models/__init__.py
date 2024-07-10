@@ -1,8 +1,8 @@
+#!/usr/bin/python3
+"""Packaege Initialization model"""
 
-from .engine.file_storage import FileStorage
+from models.engine.file_storage import FileStorage
+
 
 storage = FileStorage()
 storage.reload()
-__all__ = [
-        "base_model",# 'base_model.py' file
-]

@@ -2,7 +2,6 @@
 """Serialization and Deserialization of instances"""
 
 import json
-from models.base_model import BaseModel
 
 class FileStorage:
     """
@@ -15,9 +14,7 @@ class FileStorage:
         self.__objects = {}
 
     def all(self):
-        """
-        Return __object dictionary by <class name>.id
-        """
+        """Return __object dictionary by <class name>.id"""
         return self.__objects
 
     def new(self, obj):
@@ -29,21 +26,20 @@ class FileStorage:
         Args:
             obj -> object to write
         """
-
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
-        """
-        Serializes__objects to the JSON file
-        """
+        """Serializes __objects to the JSON file"""
         with open(self.__file_path, "w", encoding="utf-8") as save_file:
-            json.dump({key: value.to_dict() \
-                for key, value in self.__objects.items()}, save_file)
+            obj_dict = {k: v.to_dict() for k, v in self.__objects.items()}
+            json.dump(obj_dict, save_file)
 
     def reload(self):
-        """
-        Deserializes the JSON file to  __objects
-        """
+        """Deserializes the JSON file to  __objects"""
+
+        from models.base_model import BaseModel
+
         try:
             with open(self.__file_path, "r", encoding="utf-8") as load_file:
                 d = json.load(load_file)

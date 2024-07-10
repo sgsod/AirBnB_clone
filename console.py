@@ -25,9 +25,11 @@ class HBNBCommand(cmd.Cmd):
     """
 
 
-    def __init__(self):
-        self.prompt = "(hbnb)"
-    
+    prompt = "(hbnb) "
+
+    def do_create(self):
+        pass
+
     def emptyline(self):
         """
         parse empty line without repeating last command
@@ -35,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
-    def do_exit(self):
+    def do_quit(self):
         """
         exit interpreter
         """
@@ -46,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Exit the interpreter
         """
-
+        print()
         return True
 
 if __name__ == '__main__':
