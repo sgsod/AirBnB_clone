@@ -48,10 +48,7 @@ class BaseModel:
         storage.save()
 
     def __str__(self):
-        """
-        Print string representation of BaseModel
-        """
-        
+        """Print string representation of BaseModel"""
         return "[{}] ({}) {}"\
             .format(type(self).__name__, self.id, self.__dict__)
 
